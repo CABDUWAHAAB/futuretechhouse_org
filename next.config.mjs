@@ -1,0 +1,50 @@
+let userConfig = undefined
+try {
+  userConfig = await import('./v0-user-next.config')
+} catch (e) {
+  // ignore error
+}
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export', // Next.js 14+ export-methode
+  images: {
+    unoptimized: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  experimental: {
+    webpackBuildWorker: true,
+    parallelServerBuildTraces: true,
+    parallelServerCompiles: true,
+  },
+  trailingSlash: true, // Gebruik dit in plaats van exportTrailingSlash
+}
+
+mergeConfig(nextConfig, userConfig)
+
+function mergeConfig(nextConfig, userConfig) {
+  if (!userConfig) {
+    return
+  }
+
+  for (const key in userConfig) {
+    if (
+      typeof nextConfig[key] === 'object' &&
+      !Array.isArray(nextConfig[key])
+    ) {
+      nextConfig[key] = {
+        ...nextConfig[key],
+        ...userConfig[key],
+      }
+    } else {
+      nextConfig[key] = userConfig[key]
+    }
+  }
+}
+
+export default nextConfig
