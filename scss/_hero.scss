@@ -1,0 +1,60 @@
+@use "./variables";
+@use "./mixins";
+
+.hero {
+  background: url('../images/hero-bg.jpg') no-repeat center center/cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: variables.$white;
+  
+  .container {
+      h1 {
+          font-size: 36px;
+          margin-bottom: 10px;
+      }
+      
+      p {
+          font-size: 18px;
+          margin-bottom: 20px;
+      }
+
+      .search-bar {
+          display: flex;
+          justify-content: center;
+          margin-top: 15px;
+
+          input {
+              padding: 10px;
+              width: 300px;
+              border: none;
+              border-radius: 5px;
+          }
+
+          button {
+              @include mixins.button(variables.$secondary-color, variables.$white);
+              margin-left: 10px;
+          }
+      }
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+      flex-direction: column;
+  }
+
+  .hero .container {
+      text-align: center;
+  }
+
+  section .cards, 
+  section .course-list, 
+  section .career-items, 
+  section .apply-cards, 
+  section .testimonial-items, 
+  section .recommended-items {
+      grid-template-columns: 1fr;
+  }
+}

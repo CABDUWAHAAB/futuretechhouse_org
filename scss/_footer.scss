@@ -1,0 +1,28 @@
+@use "./variables";
+
+footer {
+  background: variables.$dark-blue;
+  color: variables.$white;
+  padding: 40px 0;
+
+  .container {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .footer-section {
+      h3 {
+          font-size: 18px;
+          margin-bottom: 10px;
+      }
+
+      p {
+          font-size: 14px;
+      }
+
+      select {
+          padding: 8px;
+          border-radius: 5px;
+      }
+  }
+}
